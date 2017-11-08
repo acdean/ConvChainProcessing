@@ -1,15 +1,25 @@
-//import ConvChain.Generator;
-//import processing.core.PApplet;
-//import processing.core.PImage;
+// a port of ConvChainJava to Processing
 
-//public class Main extends PApplet {
-//    public static void main(String[] args) {
-//        PApplet.main(Main.class.getCanonicalName());
-//    }
+PImage image;
+Generator generator;
+PImage output;
 
 public void settings() {
   size(256, 128);
   noSmooth();
+  noLoop();
+}
+
+public void setup() {
+  colorMode(RGB, 1, 1, 1);
+  image = loadImage("Less Rooms.bmp");
+  generator = new Generator(toArray(image), 3, 1.2, 32, 32);
+  updateOutput();
+}
+
+public void draw() {
+  image(image, 0, 0, 128, 128);
+  image(output, 128, 0, 128, 128);
 }
 
 boolean[][] toArray(PImage image) {
@@ -45,30 +55,13 @@ PImage toPImage(boolean[][] array, PImage result) {
   return result;
 }
 
-
-PImage image;
-Generator generator;
-PImage output;
-
 void updateOutput() {
   output = toPImage(generator.field, output);
-}
-
-public void setup() {
-  colorMode(RGB, 1, 1, 1);
-  image = loadImage("Less Rooms.bmp");
-  generator = new Generator(toArray(image), 3, 1.2, 32, 32);
-  updateOutput();
-}
-
-public void draw() {
-  image(image, 0, 0, 128, 128);
-  image(output, 128, 0, 128, 128);
 }
 
 @Override
   public void keyPressed() {
   generator.iterate();
   updateOutput();
+  redraw();
 }
-//}

@@ -1,6 +1,3 @@
-//package ConvChain;
-
-
 import java.util.HashMap;
 import java.util.Random;
 
@@ -51,13 +48,6 @@ public class Generator {
       }
     }
 
-    //weights.replaceAll((pattern, weight) -> {
-    //    if (weight <= 0.)
-    //        return DEFAULT_WEIGHT;
-    //    else
-    //        return weight;
-    //});
-    // replaced with:
     for (Integer i : weights.keySet()) {
       if (weights.get(i) <= 0) {
         weights.put(i, DEFAULT_WEIGHT);
